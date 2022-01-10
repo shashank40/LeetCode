@@ -30,13 +30,6 @@ class Solution {
         arr[part]=arr[max];
         arr[max]=temp;
 
-        PriorityQueue<Integer> pq= new PriorityQueue<>();
-        for(int i=max+1;i<n;i++){
-            pq.add(arr[i]);
-        }
-
-        for(int i=max+1;i<n;i++){
-            arr[i]=pq.poll();
-        }
+       Arrays.sort(arr,max+1,n);
     }
 }
