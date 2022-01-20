@@ -1,37 +1,38 @@
 class Solution {
-    HashMap<Integer,Integer> t;
     public int lengthOfLIS(int[] A) {
-    	t= new HashMap<>();
-		
-		return ans(A,Integer.MIN_VALUE,0);
-	}
-	
-	int ans(int A[], int prev, int i){
-		if(i==A.length)
-			return 0;
-		
-		if(t.containsKey(prev))
-			return t.get(prev);
-		
-			int and=-1;
-		
-			
-		
-		if(prev==Integer.MIN_VALUE || A[i]>A[prev]){
-			if(t.containsKey(i))
-				and=t.get(i);
-			
-			if(and==-1)
-		t.put(prev,(Math.max(1+ans(A,i,i+1),ans(A,prev,i+1))));
-			else
-				t.put(prev,(Math.max(1+and,ans(A,prev,i+1))));
-			
-			return t.get(prev);
-			
+        ArrayList<Integer> arr=new ArrayList<>();
+		int n=A.length;
+		int val=0;
+		for(int i=0;i<n;i++){
+			if(arr.size()==0 || arr.get(arr.size()-1)<A[i])
+				arr.add(A[i]);
+			else{
+				val=BS(A[i],arr);
+				if(val==-1)
+					continue;
+				else
+					arr.set(val,A[i]);
+			}
 		}
 		
-		t.put(prev,(ans(A,prev,i+1)));
-			return t.get(prev);
+		return arr.size();
 	}
+	int BS(int val, ArrayList<Integer> arr){
+		int i=0;
+		int j=arr.size()-1;
+		int ans=-1;
+		while(i<=j){
+			int m=i+(j-i)/2;
+			if(arr.get(m)==val)
+				return -1;
+			else if(arr.get(m)>val){
+				ans=m;
+				j=m-1;
+			}
+			else
+				i=m+1;
+		}
+		
+		return ans;
+    }
 }
-    
