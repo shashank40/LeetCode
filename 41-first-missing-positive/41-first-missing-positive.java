@@ -1,32 +1,20 @@
 class Solution {
-    boolean val[];
-    public int firstMissingPositive(int[] A) {
-         int n=A.length;
-       val=new boolean[500001];
-        int max=Integer.MIN_VALUE;
-        int min=Integer.MAX_VALUE;
+    public int firstMissingPositive(int[] nums) {
+        int n=nums.length;
         for(int i=0;i<n;i++){
+            int curr=nums[i];
             
-                if(A[i]>0)
-                    min=Math.min(min,A[i]);
-            
-            max=Math.max(max,A[i]);
-        }
-
-        if(max<=0 || min>1)
-        return 1;
-        
-        for(int i=0;i<n;i++){
-            if(A[i]>0 && (A[i]-min)<500001)
-                val[A[i]-min]=true;
+            while(curr>0 && curr<=n && nums[curr-1]!=curr){
+                int tmp=nums[curr-1];
+                nums[curr-1]=curr;
+                curr=tmp;
+            }
         }
         
-        for(int i=0;i<500001;i++)
-            if(val[i]==false)
-                return (i+min);
+        for(int i=0;i<n;i++)
+            if(nums[i]!=i+1)
+                return i+1;
         
-        
-        return (max+1);
-        
+        return n+1;
     }
 }
