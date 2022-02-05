@@ -19,7 +19,7 @@ class Solution {
             A=A/10;
         }
         if((b.charAt(b.length()-1)-'0') != nums/val)
-        return 0;
+        return 0; //// to check overflow
         
         if(p==1)
         return -1*nums;
