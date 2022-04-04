@@ -13,31 +13,36 @@ class Solution {
         if(head==null)
             return null;
         
+        int i=0;
         ListNode temp=head;
-        
-        Queue<ListNode> st= new LinkedList<>();
         ListNode curr=null;
-        while(st.size()<k && temp!=null)
-        {   st.add(temp);
-         if(st.size()==k)
-             curr=temp;
+        while(i<k && temp!=null){
+            i++;
+            if(i==k)
+                curr=temp;
             temp=temp.next;
         }
         
-        if(st.size()<k && temp==null)
+        if(curr==null)
             return head;
-         while(temp!=null){
-            st.add(temp);
+        while(temp!=null){
+            i++;
             temp=temp.next;
         }
         
-        while(st.size()>k)
-            st.poll();
+        int n=0;
+        temp=head;
+        while(n<i-k){
+            n++;
+            temp=temp.next;
+            
+        }
         
-        int c=curr.val;
-        curr.val=st.peek().val;
-        st.peek().val=c;
+        int v=curr.val;
+        curr.val=temp.val;
+        temp.val=v;
         
         return head;
+        
     }
 }
