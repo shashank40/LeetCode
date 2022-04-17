@@ -15,41 +15,25 @@
  */
 class Solution {
     public TreeNode increasingBST(TreeNode root) {
-        if(root==null)
-            return null;
-        Queue<TreeNode> q=new LinkedList<>();
-        ArrayList<TreeNode> arr=new ArrayList<>();
-        q.add(root);
+        if(root==null || (root.left==null && root.right==null))
+            return root;
         
-        while(!q.isEmpty()){
-            TreeNode temp=q.poll();
-            if(temp.left!=null){
-                q.add(temp.left);
-                temp.left=null;
-            }
-            if(temp.right!=null){
-                q.add(temp.right);
-                temp.right=null;
-            }
-            
-            arr.add(temp);
-        }
+        TreeNode left=increasingBST(root.left);
+        root.left=null;
+        TreeNode right=increasingBST(root.right);
+        root.right=null;
+        TreeNode temp=left;
+        while(temp!=null && temp.right!=null)
+            temp=temp.right;
         
-        Collections.sort(arr,new myCmp());
-        TreeNode temp=new TreeNode(-1);
-        TreeNode temp2=temp;
-        for(TreeNode a:arr){
-            temp2.right=a;
-            temp2=temp2.right;
-        }
+        if(temp!=null)
+            temp.right=root;
+        root.right=right;
         
-        return temp.right;
-            
-    }
-    
-    class myCmp implements Comparator<TreeNode>{
-        public int compare(TreeNode a,TreeNode b){
-            return a.val-b.val;
-        }
+        if(left!=null)
+            return left;
+        
+        return root;
+        
     }
 }
