@@ -14,25 +14,46 @@
  * }
  */
 class Solution {
-    ArrayList<Integer> arr=new ArrayList<>();
-    ArrayList<TreeNode> arr2=new ArrayList<>();
+    ArrayList<TreeNode> arr=new ArrayList<>();
     int i=0;
     public void recoverTree(TreeNode root) {
         fill(root);
-        Collections.sort(arr);
-            int i=0;
-        for(int a:arr){
-            arr2.get(i++).val=a;
+        int fault1=-1;
+        int fault2=-1;
+        int n=arr.size();
+        int prev=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+            if(arr.get(i).val>=prev){
+                prev=arr.get(i).val;
+            }
+            else if(fault1==-1){
+                fault1=i; 
+            prev=arr.get(i).val;}
+            else
+                fault2=i;
         }
+        
+        //only two swaped, to exchange krenge to imagine case 1 : when wrong are far and case2: wrong are adjacent
+        
+        if(fault2==-1){
+            fault2=fault1-1;
+        }
+        else
+            fault1--;
+        
+        
+        prev=arr.get(fault1).val;
+        arr.get(fault1).val=arr.get(fault2).val;
+        arr.get(fault2).val=prev;
+        
     }
     
     public void fill(TreeNode root){
         if(root==null)
             return;
-        
+           /////////// PROPERTY USED : INORDER IS ALWAYS IN INCREASING ORDER FOR BST
         fill(root.left);
-        arr.add(root.val);
-        arr2.add(root);
+        arr.add(root);
         fill(root.right);
     }
     
