@@ -15,7 +15,6 @@
  */
 class Solution {
     ArrayList<TreeNode> arr=new ArrayList<>();
-    int i=0;
     public void recoverTree(TreeNode root) {
         fill(root);
         int fault1=-1;
