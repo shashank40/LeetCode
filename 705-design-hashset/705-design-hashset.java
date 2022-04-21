@@ -1,19 +1,19 @@
 class MyHashSet {
-    int arr[];
+    boolean arr[];
     public MyHashSet() {
-        arr=new int[1000001];
+        arr=new boolean[1000001];
     }
     
     public void add(int key) {
-        arr[key]=1;
+        arr[key]=true;
     }
     
     public void remove(int key) {
-      arr[key]=0;
+      arr[key]=false;
     }
     
     public boolean contains(int key) {
-        return (arr[key]==1);
+        return arr[key];
     }
 }
 
