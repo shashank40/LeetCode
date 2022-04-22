@@ -5,7 +5,7 @@ class MyHashMap {
     }
     
     public void put(int key, int value) {
-        val[key]=(Integer)value;
+        val[key]=value;
     }
     
     public int get(int key) {
