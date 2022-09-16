@@ -1,16 +1,26 @@
 class Solution {
-    Integer t[][]=new Integer[1000][1000];
-    public int maximumScore(int[] nums, int[] mul) {
-        return value(0,nums.length,0,nums,mul);
+    
+    
+    // Dynamic programming solution with memory optimized
+    public int maximumScore(int[] nums, int[] multipliers) {
+        
+        int n = nums.length;
+        int m = multipliers.length;
+        
+        int right = n-1;
+            
+        int[] dp = new int[m+1]; 
+        
+        for(int index=m-1; index >= 0; index--){
+            for(int left=0; left<=index; left++){
+                right = (n-1)-(index-left);
+                 dp[left] = Math.max(multipliers[index]*nums[left]+dp[left+1],
+                              multipliers[index]*nums[right]+dp[left]);
+        
+            }
+        }
+        
+        return dp[0];
     }
     
-    public int value(int x,int n,int i, int nums[], int mul[]){
-        if(i==mul.length)
-            return 0;
-        if(t[x][i]!=null)
-            return t[x][i];
- 
-        return t[x][i]= Math.max(nums[x]*mul[i] + value(x+1,n,i+1,nums,mul),
-                                 nums[n-1-i+x]*mul[i] + value(x,n,i+1,nums,mul));
-    }
 }
