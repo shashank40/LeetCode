@@ -8,10 +8,10 @@ class Solution {
         if(i==mul.length)
             return 0;
         if(t[x][i]!=null)
-            return (int)t[x][i];
+            return t[x][i];
         int val = nums[x]*mul[i] + value(x+1,i+1,nums,mul);
         int val2= nums[nums.length-1-i+x]*mul[i] + value(x,i+1,nums,mul);
-        t[x][i]=(Integer)Math.max(val,val2); 
-        return (int)t[x][i];
+ 
+        return t[x][i]= Math.max(val,val2);
     }
 }
