@@ -5,25 +5,10 @@ class Solution {
             return 0;
         
         Stack<Integer> s = new Stack<>();
-        
-        int left[]=new int[n];
+        int curr=0;
+        int max=h[0];
         int right[]=new int[n];
         int sum=0;
-        s.add(h[0]);
-        for(int i=1;i<n-1;i++){
-           while(s.size()>0 && s.peek()<=h[i])
-               s.pop();
-            
-            if(s.size()>0)
-                left[i]=s.peek();
-            else{
-                left[i]=h[i];
-                s.add(h[i]);
-            }
-            
-        }
-        
-        s.clear();
         
         s.add(h[n-1]);
         
@@ -42,7 +27,10 @@ class Solution {
         }
         
         for(int i=1;i<n-1;i++){
-            sum+=(Math.min(left[i],right[i]) - h[i]);
+            curr=(Math.min(max,right[i]) - h[i]);
+            if(curr>0)
+                sum+=curr;
+            max=Math.max(max,h[i]);
         }
         
         return sum;
