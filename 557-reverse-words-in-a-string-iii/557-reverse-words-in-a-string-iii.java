@@ -1,27 +1,20 @@
 class Solution {
     public String reverseWords(String s) {
-        int n=s.indexOf(" ");
-        int i=0;
-        String ans="";
-        while(n>=0){
-            String c=reverse(s.substring(i,n));
-            ans+= (c + " " );
-            i=n+1;
-            n=s.indexOf(" ",i);
+        String arr[]=s.split(" ");
+        String ans = "";
+        for(String a: arr){
+            ans+=reverse(a) + " ";
         }
-        ans+=(reverse(s.substring(i)));
-        return ans;
+        
+        return ans.substring(0,s.length());
     }
-    
     public String reverse(String s){
-        char c[]=s.toCharArray();
-        String a="";
-        int n=c.length;
-        
-        for(int i=n-1;i>=0;i--){
-            a+=c[i];
+        int n=s.length();
+        String ans="";
+        for(int i=0;i<n;i++){
+            ans=s.charAt(i)+ans;
         }
         
-        return a;
+        return ans;
     }
 }
