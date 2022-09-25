@@ -1,11 +1,13 @@
 class MyCircularQueue {
     int arr[];
     int size;
-    int add=0;
-    int rem=0;
+    int add;
+    int rem;
     public MyCircularQueue(int k) {
         arr=new int[k];
         size=0;
+        add=0;
+        rem=0;
     }
     
     public boolean enQueue(int value) {
