@@ -2,7 +2,7 @@ class Solution {
     int m=1000000007;
     Integer t[][];
     public int numRollsToTarget(int n, int k, int target) {
-        t=new Integer[30][1000];
+        t=new Integer[n][target];
         return value(1,n,k,target);
     }
     
