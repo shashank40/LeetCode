@@ -1,11 +1,12 @@
 class Solution {
-    public int minCost(String col, int[] needT) {
+    public int minCost(String colors, int[] needT) {
+        char col[]=colors.toCharArray();
         int curr=0;
         int sum=0;
         int ans=0;
         int max=Integer.MIN_VALUE;
-        for(int i=0; i<col.length();i++){
-            if(i==0 || col.charAt(i)==col.charAt(i-1)){
+        for(int i=0; i<col.length;i++){
+            if(i==0 || col[i]==col[i-1]){
                 curr++;
                 sum+=needT[i];
                 max=Math.max(max,needT[i]);
