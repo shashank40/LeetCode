@@ -15,24 +15,33 @@
  */
 class Solution {
     public boolean hasPathSum(TreeNode root, int targetSum) {
-         if(root==null){
+        if(root==null)
             return false;
+        Queue<pair> q = new LinkedList<>();
+        q.add(new pair(root,targetSum));
+        
+        while(!q.isEmpty()){
+            pair temp=q.poll();
+            if(temp.node.left==null && temp.node.right==null)
+                if (temp.sO-temp.node.val==0)
+                    return true;
+            
+            if(temp.node.left!=null)
+                q.add(new pair(temp.node.left, temp.sO-temp.node.val));
+            
+            if(temp.node.right!=null)
+                q.add(new pair(temp.node.right, temp.sO-temp.node.val));
         }
         
-        if(root.left==null && root.right==null)
-            return (targetSum-root.val == 0);
+        return false;
+    }
+    class pair {
+        TreeNode node;
+        int sO;
         
-        boolean ans=false;
-        
-        if(root.left!=null)
-            ans=ans|hasPathSum(root.left,targetSum-root.val);
-        
-        if(ans==true)
-            return ans;
-        
-        if(root.right!=null)
-            ans=ans|hasPathSum(root.right,targetSum-root.val);
-        
-        return ans;
+        pair(TreeNode n, int sum){
+            node=n;
+            sO=sum;
+        }
     }
 }
