@@ -3,7 +3,7 @@ class Solution {
     
         Arrays.sort(nums);
         int n=nums.length;
-        int val=nums[0]+nums[1]+nums[n-1];
+        int val=1000000;
         
         for(int i=0;i<n-2;i++){
             int x=i+1;
