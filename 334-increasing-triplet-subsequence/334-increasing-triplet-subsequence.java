@@ -8,13 +8,13 @@ class Solution {
             max=Math.max(max,nums[i]);
         }
         
-        int min = nums[0];
+         max = nums[0]; // to save space , else i used int min before
         
         for(int i=1;i<n-1;i++){
-            if(min<nums[i] && right[i]>nums[i])
+            if(max<nums[i] && right[i]>nums[i])
                 return true;
             
-            min=Math.min(min,nums[i]);
+            max=Math.min(max,nums[i]);
         }
         
         return false;
